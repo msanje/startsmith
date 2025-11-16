@@ -3,10 +3,21 @@ import {
   ResizablePanel,
   ResizablePanelGroup,
 } from "@/components/ui/resizable"
-import Editor from "./Editor"
 import Preview from "./Preview"
+import EditorView from "./Editor"
+import { useState } from "react"
+import {useLocalStorage} from "@uidotdev/usehooks"
+
+
+const initial = ``
 
 export function ResizableView() {
+  const [storedText, setStoredText] = useLocalStorage(
+    "typescript.text",
+    initial
+  )
+  const [text, setText] = useState(storedText);
+
   return (
     <ResizablePanelGroup
       direction="horizontal"
@@ -15,7 +26,8 @@ export function ResizableView() {
     >
       <ResizablePanel defaultSize={40}>
         <div className="flex h-full items-center justify-center p-6">
-          <Editor />
+          {/* <Editor /> */}
+        <EditorView value={text} onChange={(val) => setText(val!)} /> 
         </div>
       </ResizablePanel>
       <ResizableHandle />

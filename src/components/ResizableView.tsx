@@ -1,5 +1,4 @@
-import {
-  ResizableHandle,
+import { ResizableHandle,
   ResizablePanel,
   ResizablePanelGroup,
 } from "@/components/ui/resizable"
@@ -7,7 +6,6 @@ import Preview from "./Preview"
 import EditorView from "./Editor"
 import { useEffect, useState } from "react"
 import {useLocalStorage} from "@uidotdev/usehooks"
-
 
 const initial = ``
 

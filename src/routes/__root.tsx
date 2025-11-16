@@ -63,7 +63,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
           <ClerkProvider>
             {/* TODO: Verify whether we need this or not */}
             {/* Put this is in a dedicated page for only my reference */}
-            {/* <Header /> */}
+            <Header />
             {children}
             <TanStackDevtools
               config={{

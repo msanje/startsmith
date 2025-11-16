@@ -5,7 +5,7 @@ import {
 } from "@/components/ui/resizable"
 import Preview from "./Preview"
 import EditorView from "./Editor"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import {useLocalStorage} from "@uidotdev/usehooks"
 
 
@@ -18,6 +18,14 @@ export function ResizableView() {
   )
   const [text, setText] = useState(storedText);
 
+  const handleOnchange = (val: string) => {
+    setText(val);
+  }
+
+  useEffect(() => {
+    setStoredText(text);
+  }, [text])
+
   return (
     <ResizablePanelGroup
       direction="horizontal"
@@ -27,7 +35,8 @@ export function ResizableView() {
       <ResizablePanel defaultSize={40}>
         <div className="flex h-full items-center justify-center p-6">
           {/* <Editor /> */}
-        <EditorView value={text} onChange={(val) => setText(val!)} /> 
+        {/* <EditorView value={text} onChange={(val) => setText(val!)} />  */}
+        <EditorView value={text} onChange={(val) => handleOnchange(val!)} /> 
         </div>
       </ResizablePanel>
       <ResizableHandle />

@@ -21,11 +21,8 @@ export function ResizableView() {
 
 	const handleOnchange = (val: string) => {
 		setText(val);
+		setStoredText(val);
 	};
-
-	useEffect(() => {
-		setStoredText(text);
-	}, [text]);
 
 	return (
 		<ResizablePanelGroup
@@ -43,7 +40,7 @@ export function ResizableView() {
 			<ResizableHandle />
 			<ResizablePanel defaultSize={60}>
 				<div className="flex h-full items-center justify-center p-6">
-					<Preview input={} />
+					<Preview input={text} />
 				</div>
 			</ResizablePanel>
 		</ResizablePanelGroup>

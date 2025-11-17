@@ -1,0 +1,21 @@
+{
+	"name": "User",
+	"fields": [
+		{
+			"name": "name",
+			"type": "string",
+			"required": true
+		},
+		{
+			"name": "age",
+			"type": "number",
+			"required": true
+		},
+		{
+			"name": "active",
+			"type": "unknown",
+			"required": true
+		}
+	],
+	"raw": "name: string;\n  age: number;\n  active: boolean;"
+}

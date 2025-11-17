@@ -19,6 +19,8 @@ export default function Preview({ input }: Props) {
 	const [schema, setSchema] = useState<NormalizedSchema | null>(null);
 	const [error, setError] = useState<string | null>(null);
 
+	console.log("schema from Preview: ", schema);
+
 	const generatedFiles = schema
 		? {
 				"schema.ts": generateSchemaTs(schema),
@@ -42,6 +44,8 @@ export default function Preview({ input }: Props) {
 
 		try {
 			const parsed = parseFirstInterface(debounced);
+			console.log("parsed: ", parsed);
+
 			setSchema(parsed);
 			setError(null);
 		} catch (error: any) {

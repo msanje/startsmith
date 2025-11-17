@@ -1,6 +1,8 @@
 import { Field, NormalizedSchema } from "../types";
 
 export function generateSchemaTs(schema: NormalizedSchema): string {
+	console.log("schema from generateSchemaTs: ", schema);
+
 	const lines: string[] = [];
 
 	lines.push(`import {z} from "zod";`);
@@ -17,7 +19,7 @@ export function generateSchemaTs(schema: NormalizedSchema): string {
 				return `z.number()${field.required ? "" : ".optional()"}`;
 
 			case "boolean":
-				return `z.number()${field.required ? "" : ".optional()"}`;
+				return `z.boolean()${field.required ? "" : ".optional()"}`;
 
 			case "array": {
 				const item =

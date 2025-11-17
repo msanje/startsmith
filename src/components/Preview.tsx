@@ -1,9 +1,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { generateApiTs } from "@/lib/generators/generateApiTs";
+import { generateFormTsx } from "@/lib/generators/generateFormTsx";
+import { generateSchemaTs } from "@/lib/generators/generateSchemaTs";
 import { parseFirstInterface } from "@/lib/parse";
 import { NormalizedSchema } from "@/lib/types";
+import CodeView from "./CodeView";
 import { PreviewForm } from "./PreviewForm";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
 
 interface Props {
 	input: string;
@@ -13,6 +18,14 @@ export default function Preview({ input }: Props) {
 	const [debounced, setDebounced] = useState(input);
 	const [schema, setSchema] = useState<NormalizedSchema | null>(null);
 	const [error, setError] = useState<string | null>(null);
+
+	const generatedFiles = schema
+		? {
+				"schema.ts": generateSchemaTs(schema),
+				"Form.tsx": generateFormTsx(schema),
+				"api.ts": generateApiTs(schema),
+			}
+		: {};
 
 	useEffect(() => {
 		const id = setTimeout(() => setDebounced(input), 250);
@@ -49,7 +62,28 @@ export default function Preview({ input }: Props) {
 				</div>
 			)}
 
-			{schema && <PreviewForm schema={schema} />}
+			{/* {schema && <PreviewForm schema={schema} />} */}
+
+			<Tabs defaultValue="preview">
+				<TabsList>
+					<TabsTrigger value="preview">Preview</TabsTrigger>
+					<TabsTrigger value="code">Code</TabsTrigger>
+				</TabsList>
+
+				<TabsContent value="preview">
+					{schema ? (
+						<PreviewForm schema={schema!} />
+					) : (
+						<div className="p-4 text-sm text-muted-foreground">
+							Type an interface on the left to generate a form
+						</div>
+					)}
+				</TabsContent>
+
+				<TabsContent value="code">
+					<CodeView files={generatedFiles} />
+				</TabsContent>
+			</Tabs>
 		</div>
 	);
 }

@@ -208,31 +208,3 @@ interface EcommerceOrder {
 	};
 	notes?: string;
 }
-
-interface Product {
-	id: string;
-	title: string;
-	price: number;
-	inStock: boolean;
-	tags?: string[];
-
-	manufacturer: {
-		name: string;
-		country: string;
-		established?: number;
-	};
-
-	variants: {
-		sku: string;
-		color?: string;
-		size?: "S" | "M" | "L" | "XL";
-		extra?: {
-			weight?: number;
-			dimensions?: {
-				width: number;
-				height: number;
-				depth: number;
-			};
-		};
-	}[];
-}
